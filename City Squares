@@ -1,0 +1,46 @@
+
+
+
+
+public class CitySquare{
+  
+  int locx;
+  int locy;
+  //int[][] grounds = new int[25][25];
+  boolean sqstart = true;
+  boolean cityable = false;
+  int bx = 0;
+  int by = 0;
+  int waterCounter = 0;
+  int landCounter = 0;
+  float percent = 0;
+  
+  CitySquare(int templocx, int templocy){
+    locx = templocx; 
+    locy = templocy;
+  }
+  
+  void doStuff(){
+    if(sqstart == true){
+      bx = (locx-1)*40;
+      by = (locy-1)*40;
+      for(int i = bx; i<=bx+40; i++){
+        for(int j = by; j<=by+40; j++){
+          if(grid[i][j].ground == 6){
+            waterCounter += 1;
+          } else {
+            landCounter += 1;
+          }
+        }
+      }
+      percent = (landCounter/1600)*100;
+      if(percent>=75){
+        cityable = true;
+      } else {
+        cityable = false;
+      }
+      sqstart = false;
+    }
+  }
+  
+}
