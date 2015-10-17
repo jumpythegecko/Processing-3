@@ -1,0 +1,152 @@
+
+
+public void UP(int Anxtemp, int Anytemp) {
+  Anx = Anxtemp;
+  Any = Anytemp;
+  if (millis()-mmm<(speed/8)*5) {
+    if (Anstart) {
+      if (rightFoot) {
+        rightFoot = false;
+        Anstart = false;
+      } else {
+        rightFoot = true;
+        Anstart = false;
+      }
+    }
+    if (rightFoot == true) {
+      if (py<=460) {
+        image(player1Back2, Anx, Any-7);
+      } else {
+        image(player1Back2, Anx, Any-7);
+      }
+    } else {
+      if (py<=460) {
+        image(player1Back3, Anx, Any-7);
+      } else {
+        image(player1Back3, Anx, Any-7);
+      }
+    }
+  } else {
+    uA = false;
+    image(player1Up, Anx, Any-7);
+    Anstart = true;
+  }
+}
+
+
+
+
+int mmm = 0;
+boolean Anstart = true;
+int Anx = 0;
+int Any = 0;
+
+
+
+
+public void DOWN(int Anxtemp, int Anytemp) {
+  Anx = Anxtemp;
+  Any = Anytemp;
+  if (millis()-mmm<(speed/8)*5) {
+    if (Anstart) {
+      if (rightFoot) {
+        rightFoot = false;
+        Anstart = false;
+      } else {
+        rightFoot = true;
+        Anstart = false;
+      }
+    }
+    if (rightFoot == true) {
+      if (py<=460) {
+        image(player1Up1, Anx, Any);
+      } else {
+        image(player1Up1, Anx, Any);
+      }
+    } else {
+      if (py<=460) {
+        image(player1Up2, Anx, Any);
+      } else {
+        image(player1Up2, Anx, Any);
+      }
+    }
+  } else {
+    dA = false;
+    image(player1, Anx, Any);
+    Anstart = true;
+  }
+}
+
+
+
+
+
+public void LEFT(int Anxtemp, int Anytemp) {
+  Anx = Anxtemp;
+  Any = Anytemp;
+  if (millis()-mmm<(speed/8)*5) {
+    if (Anstart) {
+      if (rightFoot) {
+        rightFoot = false;
+        Anstart = false;
+      } else {
+        rightFoot = true;
+        Anstart = false;
+      }
+    }
+    if (rightFoot == true) {
+      if (py<=460) {
+        image(player1Left2, Anx, Any-7);
+      } else {
+        image(player1Left2, Anx, Any-7);
+      }
+    } else {
+      if (py<=460) {
+        image(player1Left3, Anx, Any-7);
+      } else {
+        image(player1Left3, Anx, Any-7);
+      }
+    }
+  } else {
+    lA = false;
+    image(player1Left, Anx, Any-7);
+    Anstart = true;
+  }
+}
+
+
+
+
+
+public void RIGHT(int Anxtemp, int Anytemp) {
+  Anx = Anxtemp;
+  Any = Anytemp;
+  if (millis()-mmm<(speed/8)*5) {
+    if (Anstart) {
+      if (rightFoot) {
+        rightFoot = false;
+        Anstart = false;
+      } else {
+        rightFoot = true;
+        Anstart = false;
+      }
+    }
+    if (rightFoot == true) {
+      if (py<=460) {
+        image(player1Right2, Anx, Any-7);
+      } else {
+        image(player1Right2, Anx, Any-7);
+      }
+    } else {
+      if (py<=460) {
+        image(player1Right3, Anx, Any-7);
+      } else {
+        image(player1Right3, Anx, Any-7);
+      }
+    }
+  } else {
+    rA = false;
+    image(player1Right, Anx, Any-7);
+    Anstart = true;
+  }
+}
