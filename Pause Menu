@@ -1,0 +1,122 @@
+
+
+
+
+
+void MMain() {
+  noSmooth();
+  fill(200);
+  stroke(0);
+  rect(1000, 50, 200, 580);
+  textSize(40);
+  stroke(0);
+  fill(0);
+  text("Options", 1020, 100);
+  textSize(30);
+  text("something", 1037, 150);
+  text("something", 1037, 200);
+  text("something", 1037, 250);
+  text("something", 1037, 300);
+  text("something", 1037, 350);
+  text("something", 1037, 400);
+  text("Inventory", 1037, 450);
+  text("Save game", 1037, 500);
+  text("Load game", 1037, 550);
+  text("Quit", 1037, 600);
+  optionPos = (optionNum*50)+90;
+  triangle(1020, optionPos-15, 1030, optionPos, 1020, optionPos+15);
+  if (keyPressed && millis()-om>190) {
+    if ((keyCode == UP ||key == 'w'||key == 'W') && optionNum>1) {
+      optionNum = optionNum - 1;
+    }
+    if ((keyCode == DOWN ||key == 's'||key == 'S') && optionNum<10) {
+      optionNum = optionNum + 1;
+    }
+    om = millis();
+  }
+  ShowMap();
+  if (justpaused == true) {
+    fill(222, 185, 115);
+    noStroke();
+    rect(20, 20, 960, 640);
+    bars.worldMap();
+    justpaused = false;
+  }
+}
+
+
+
+
+
+
+
+
+
+void ShowMap() {
+  if (mouseX<80 && mouseX>30 && mouseY>80 && mouseY<580) {
+    stroke(0);
+    fill(242, 205, 135);
+    rect(30, 80, 50, 500);
+    if (mousePressed && iii>0) {
+      fill(262, 225, 155);
+      rect(30, 80, 50, 500);
+      iii = iii-50;
+      bars.worldMap();
+    }
+  } else {
+    stroke(0);
+    fill(222, 185, 115);
+    rect(30, 80, 50, 500);
+  }
+  if (mouseX<850 && mouseX>100 && mouseY>30 && mouseY<60) {
+    stroke(0);
+    fill(242, 205, 135);
+    rect(100, 30, 750, 30);
+    if (mousePressed && jjj>0) {
+      fill(262, 225, 155);
+      rect(100, 30, 750, 30);
+      jjj = jjj-50;
+      bars.worldMap();
+    }
+  } else {
+    stroke(0);
+    fill(222, 185, 115);
+    rect(100, 30, 750, 30);
+  }
+  if (mouseX<950 && mouseX>900 && mouseY>80 && mouseY<580) {
+    stroke(0);
+    fill(242, 205, 135);
+    rect(900, 80, 50, 500);
+    if (mousePressed && iii<800) {
+      fill(262, 225, 155);
+      rect(900, 80, 50, 500);
+      iii = iii+50;
+      bars.worldMap();
+    }
+  } else {
+    stroke(0);
+    fill(222, 185, 115);
+    rect(900, 80, 50, 500);
+  }
+  if (mouseX<850 && mouseX>100 && mouseY>615 && mouseY<645) {
+    stroke(0);
+    fill(242, 205, 135);
+    rect(100, 615, 750, 30);
+    if (mousePressed && jjj<1050) {
+      fill(262, 225, 155);
+      rect(100, 615, 750, 30);
+      jjj = jjj+50;
+      bars.worldMap();
+    }
+  } else {
+    stroke(0);
+    fill(222, 185, 115);
+    rect(100, 615, 750, 30);
+  }
+  stroke(0);
+  noFill();
+  rect(30, 80, 50, 500);
+  rect(100, 30, 750, 30);
+  rect(900, 80, 50, 500);
+  rect(100, 615, 750, 30);
+}
