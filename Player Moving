@@ -1,0 +1,106 @@
+
+boolean playerMUp = false;
+boolean playerMDown = false;
+boolean playerMLeft = false;
+boolean playerMRight = false;
+
+boolean firstOneP = true;
+boolean secondOneP = true;
+boolean thirdOneP = true;
+int playerM = 0;
+
+
+
+void playerUp(){
+  if(firstOneP){
+    py -= 10;
+    firstOneP = false;
+  }
+  if(secondOneP && millis()-playerM>speed/4){
+    py -= 10;
+    secondOneP = false;
+  }
+  if(thirdOneP && millis()-playerM>speed/2){
+    py -= 10;
+    thirdOneP = false;
+  }
+  if(millis()-playerM>(speed/4)*3){
+    py -= 10;
+    firstOneP = true;
+    secondOneP = true;
+    thirdOneP = true;
+    playerMUp = false;
+  }
+}
+
+
+
+void playerDown(){
+  if(firstOneP){
+    py += 10;
+    firstOneP = false;
+  }
+  if(secondOneP && millis()-playerM>speed/4){
+    py += 10;
+    secondOneP = false;
+  }
+  if(thirdOneP && millis()-playerM>speed/2){
+    py += 10;
+    thirdOneP = false;
+  }
+  if(millis()-playerM>(speed/4)*3){
+    py += 10;
+    firstOneP = true;
+    secondOneP = true;
+    thirdOneP = true;
+    playerMDown = false;
+  }
+}
+
+
+
+void playerLeft(){
+  if(firstOneP){
+    px -= 10;
+    firstOneP = false;
+  }
+  if(secondOneP && millis()-playerM>speed/4){
+    px -= 10;
+    secondOneP = false;
+  }
+  if(thirdOneP && millis()-playerM>speed/2){
+    px -= 10;
+    thirdOneP = false;
+  }
+  if(millis()-playerM>(speed/4)*3){
+    px -= 10;
+    firstOneP = true;
+    secondOneP = true;
+    thirdOneP = true;
+    playerMLeft = false;
+  }
+}
+
+
+
+void playerRight(){
+  if(firstOneP){
+    px += 10;
+    firstOneP = false;
+  }
+  if(secondOneP && millis()-playerM>speed/4){
+    px += 10;
+    secondOneP = false;
+  }
+  if(thirdOneP && millis()-playerM>speed/2){
+    px += 10;
+    thirdOneP = false;
+  }
+  if(millis()-playerM>(speed/4)*3){
+    px += 10;
+    firstOneP = true;
+    secondOneP = true;
+    thirdOneP = true;
+    playerMRight = false;
+  }
+}
