@@ -1,0 +1,141 @@
+
+//import g4p_controls.*;
+
+
+void setup() {
+  size(1201, 681);
+  setup1();
+}
+
+
+CitySquare[][] citySquares;
+Box[][] grid;
+int[] ground1;
+boolean[] walkable;
+int ti;
+int tj;
+
+boolean rightFoot = false;
+boolean highlight = true;
+
+PImage player1;
+PImage player1Up;
+PImage player1Back2;
+PImage player1Back3;
+PImage player1Up1;
+PImage player1Up2;
+PImage player1Left;
+PImage player1Left2;
+PImage player1Left3;
+PImage player1Right;
+PImage player1Right2;
+PImage player1Right3;
+
+PImage grass;
+PImage grassSign;
+PImage dirt;
+PImage brick;
+PImage water;
+PImage brickDoor;
+PImage grassBush;
+PImage grassFlower;
+PImage sand;
+PImage grassTreeB;
+PImage grassTreeT;
+PImage rocks;
+PImage brickPath;
+PImage sandRock;
+PImage stone;
+PImage seaweed;
+PImage pineT;
+PImage pineB;
+
+PImage arrow;
+
+PImage fence;
+PImage fenceU;
+PImage fenceD;
+PImage fenceL;
+PImage fenceR;
+PImage fenceV;
+PImage fenceH;
+PImage fenceUR;
+PImage fenceLR;
+PImage fenceLL;
+PImage fenceUL;
+PImage fenceNU;
+PImage fenceND;
+PImage fenceNL;
+PImage fenceNR;
+PImage fenceUDLR;
+
+Player player;
+Bar bars;
+boolean u = false;
+boolean d = false;
+boolean l = false;
+boolean r = false;
+boolean pdu = false;
+boolean pdd = true;
+boolean pdl = false;
+boolean pdr = false;
+boolean uA = false;
+boolean dA = false;
+boolean lA = false;
+boolean rA = false;
+boolean mapU = false;
+boolean mapD = false;
+boolean mapL = false;
+boolean mapR = false;
+boolean startM = true;
+boolean loading = false;
+
+int map = 1;     //which map to display
+
+int px;
+int py;
+
+int plocx = 3;     //player location on the grid
+int plocy = 3;
+int wide = 1600;
+int tall = 1600;
+int gridlocx1 = 0;
+int gridlocy1 = 0;
+int gridlocx2 = 30;
+int gridlocy2 = 17;
+int health = 100;
+boolean pause = false;
+int pm = 0;
+int optionNum = 1;
+int optionPos = 0;
+int om = 0;
+
+int speed = 400; 
+
+boolean justpaused = true;
+int pground = 0;
+float noiseScale=0.03;
+int ix = 0;
+int jy = 0;
+float noiseScalex=.04;
+float noiseScale2x=.004;
+float noiseScaley=.06;
+float noiseScale2y=.008;
+int ii = 0;
+int jj = 0;
+int iii = 0;
+int jjj = 0;
+int seed = 8;
+int infot = 0;
+int infotime = 100;
+
+
+
+
+void draw() {
+  if(startM){
+    startMenu();
+  }else{
+  level1();
+  }
+}
