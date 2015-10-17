@@ -1,0 +1,206 @@
+
+public class Bar {
+
+  int z;
+
+  Bar() {
+  }
+
+  void healthBar() {
+    for (int i = 0; i<health; i++) {
+      z = (i*2)+75;
+      noFill();
+      stroke(0);
+      rect(74, 9, 202, 14);
+      fill(255, 0, 0);
+      stroke(255, 0, 0);
+      rect(z, 10, 2, 12);
+    }
+  }
+  
+  void invItem(){
+    fill(150);
+    stroke(100);
+    strokeWeight(3);
+    rect(1020,0,90,90);
+    strokeWeight(1);
+  }
+  
+  void worldMap() {
+    for (int i = 1; i<=wide/2; i++) {
+      for (int j = 1; j<=tall/3; j++) {
+        ii = i + iii;
+        jj = j + jjj;
+        pground = grid[ii][jj].ground;
+        if ((abs(px-grid[ii][jj].x))+(abs(py-grid[ii][jj].y))<=175 && (abs(px-grid[ii][jj].x)<=120) && (abs(py-grid[ii][jj].y)<=120)) {
+          fill(255, 0, 0);
+          stroke(255, 0, 0);
+//        } else if (ii%40 == 0 || jj%40 == 0) {
+//          fill(0);
+//          stroke(0);
+        } else if (pground == 0) {
+          fill(112, 26, 26);
+          stroke(112, 26, 26);
+        } else if (pground == 1) {
+          fill(40, 148, 44);
+          stroke(40, 148, 44);
+        } else if (pground == 2) {
+          fill(145, 104, 26);
+          stroke(145, 104, 26);
+        } else if (pground == 3) {
+          fill(40, 148, 44);
+          stroke(40, 148, 44);
+        } else if (pground == 4) {
+          fill(112, 0, 26);
+          stroke(112, 0, 26);
+        } else if (pground == 5) {
+          fill(18, 56, 16);
+          stroke(18, 56, 16);
+        } else if (pground == 6) {
+          fill(8, 69, 209);
+          stroke(8, 69, 209);
+        } else if (pground == 7) {
+          fill(40, 148, 44);
+          stroke(40, 148, 44);
+        } else if (pground == 8) {
+          fill(255, 175, 122);
+          stroke(255, 175, 122);
+        } else if (pground == 9) {
+          fill(94, 54, 34);
+          stroke(94, 54, 34);
+        } else if (pground == 10) {
+          fill(17, 97, 13);
+          stroke(17, 97, 13);
+        } else if (pground == 11) {
+          fill(94, 54, 34);
+          stroke(94, 54, 34);
+        } else if (pground == 12) {
+          fill(255);
+          stroke(255);
+        } else if (pground == 13) {
+          fill(246, 150, 121);
+          stroke(246, 150, 121);
+        } else if (pground == 14) {
+          fill(175);
+          stroke(175);
+        }
+        //if (grid[ii][jj].found == true) {
+        if (grid[ii][jj].Oground == 1) {
+          fill(0, 119, 114);
+          stroke(0, 119, 114);
+        }
+        if (grid[ii][jj].Oground == 2) {
+          fill(17, 97, 13);
+          stroke(17, 97, 13);
+        }
+        if (grid[ii][jj].Oground == 3) {
+          fill(94, 54, 34);
+          stroke(94, 54, 34);
+        }
+        //        if (grid[ii][jj].found == false) {
+        //          fill(0);
+        //          stroke(0);
+        //        }
+        //}
+        point(i+90, j+65);
+      }
+    }
+    imageMode(CENTER);
+    if(plocx<iii){     //arrow pointing left if player left of screen
+      translate(120,height/2);
+      rotate(PI/-2);
+      image(arrow,0,0);
+      resetMatrix();
+    } 
+    if(plocy<jjj){     //arrow pointing up if player ubove screen
+      translate((width/2)-100,90);
+      image(arrow,0,0);
+      resetMatrix();
+    } 
+    if(plocx>iii+(wide/2)){     //arrow pointing right if player is right of screen
+      translate(865,height/2);
+      rotate(PI/2);
+      image(arrow,0,0);
+      resetMatrix();
+    } 
+    if(plocy>jjj+(tall/3)){     //arrow pointing down if player below screen
+      translate((width/2)-100,575);
+      rotate(PI);
+      image(arrow,0,0);
+      resetMatrix();
+    }
+    imageMode(CORNER);
+  }
+
+
+
+  void miniMap() {
+    ix = 0;
+    jy = 0;
+    for (int i = plocx-30; i<=plocx+60; i++) {
+      for (int j = plocy-30; j<=plocy+60; j++) {
+        if (i>0 && j>0) {
+          pground = grid[i][j].ground;
+        } else {
+          pground = 0;
+        }
+        if (i<=0 || j<=0) {
+          fill(0);
+          stroke(0);
+//        } else if (grid[i][j].found == false) {
+//          fill(0);
+//          stroke(0);
+        } else if ((abs(px-grid[i][j].x))+(abs(py-grid[i][j].y))<=175 && (abs(px-grid[i][j].x)<=120) && (abs(py-grid[i][j].y)<=120)) {
+          fill(255, 0, 0);
+          stroke(255, 0, 0);
+        } else if (pground == 0) {
+          fill(112, 26, 26);
+          stroke(112, 26, 26);
+        } else if (pground == 1) {
+          fill(40, 148, 44);
+          stroke(40, 148, 44);
+        } else if (pground == 2) {
+          fill(145, 104, 26);
+          stroke(145, 104, 26);
+        } else if (pground == 3) {
+          fill(40, 148, 44);
+          stroke(40, 148, 44);
+        } else if (pground == 4) {
+          fill(112, 0, 26);
+          stroke(112, 0, 26);
+        } else if (pground == 5) {
+          fill(18, 56, 16);
+          stroke(18, 56, 16);
+        } else if (pground == 6) {
+          fill(8, 69, 209);
+          stroke(8, 69, 209);
+        } else if (pground == 7) {
+          fill(40, 148, 44);
+          stroke(40, 148, 44);
+        } else if (pground == 8) {
+          fill(255, 175, 122);
+          stroke(255, 175, 122);
+        } else if (pground == 9) {
+          fill(94, 54, 34);
+          stroke(94, 54, 34);
+        } else if (pground == 10) {
+          fill(17, 97, 13);
+          stroke(17, 97, 13);
+        } else if (pground == 11) {
+          fill(94, 54, 34);
+          stroke(94, 54, 34);
+        } else if (pground == 12) {
+          fill(255);
+          stroke(255);
+        } else if (pground == 13) {
+          fill(163, 12, 39);
+          stroke(163, 112, 39);
+        }
+        point(ix+1111, jy);
+        jy = jy + 1;
+      }
+      jy = 0;
+      ix = ix + 1;
+    }
+  }
+}
