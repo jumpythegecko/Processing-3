@@ -1,0 +1,94 @@
+
+
+void setup1(){
+  //size(1201, 681);
+  noSmooth();
+}
+
+
+void setup2(){
+  noSmooth();
+  grid = new Box[wide+1][tall+1];
+  citySquares = new CitySquare[64][64];
+  ground1 = new int[2560010];
+  walkable = new boolean[2560010];
+  player = new Player(100, 100);
+  bars = new Bar();
+  noiseDetail(4, .32);
+  //seed = int(random(-2147483647,2147483647));
+  println(seed);
+  noiseSeed(seed);
+
+  player1 = loadImage("player1.png");
+  player1Up = loadImage("player1_back.png");
+  player1Back2 = loadImage("player1_back_2.png");
+  player1Back3 = loadImage("player1_back_3.png");
+  player1Up1 = loadImage("player_1_walk_forward_1.png");
+  player1Up2 = loadImage("player_1_walk_forward_2.png");
+  player1Left = loadImage("player1_left.png");
+  player1Left2 = loadImage("player1_left_2.png");
+  player1Left3 = loadImage("player1_left_3.png");
+  player1Right = loadImage("player1_right.png");
+  player1Right2 = loadImage("player1_right_2.png");
+  player1Right3 = loadImage("player1_right_3.png");
+  
+  
+  grass = loadImage("grass.png");
+  dirt = loadImage("Rocks2.png");
+  grass = loadImage("grass.png");
+  grassSign = loadImage("grass_sign.png");
+  brick = loadImage("brick.png");
+  brickDoor = loadImage("brick_door.png");
+  grassBush = loadImage("grass_bush.png");
+  water = loadImage("water.jpeg");
+  grassFlower = loadImage("grass_flower.png");  
+  sand = loadImage("sand.jpg");
+  grassTreeB = loadImage("grass_treeB.png");
+  grassTreeT = loadImage("grass_treeT.png");
+  rocks = loadImage("Rocks.png");
+  brickPath = loadImage("brick_path.png");
+  sandRock = loadImage("sand copy.png");
+  stone = loadImage("stone1.jpg");
+  seaweed = loadImage("seaweed1.png");
+  pineT = loadImage("pinetreetop.png");
+  pineB = loadImage("pinetreebottom.png");
+
+  fence = loadImage("grass_fence_template.png");
+  fenceU = loadImage("grass_fence_up.png");
+  fenceD = loadImage("grass_fence_down.png");
+  fenceL = loadImage("grass_fence_left.png");
+  fenceR = loadImage("grass_fence_right.png");
+  fenceV = loadImage("grass_fence_V.png");
+  fenceH = loadImage("grass_fence_H.png");
+  fenceUR = loadImage("grass_fence_upR.png");
+  fenceLR = loadImage("grass_fence_downR.png");
+  fenceLL = loadImage("grass_fence_downL.png");
+  fenceUL = loadImage("grass_fence_upL.png");
+  fenceNU = loadImage("grass_fence_downH.png");
+  fenceND = loadImage("grass_fence_upH.png");
+  fenceNL = loadImage("grass_fence_Vright.png");
+  fenceNR = loadImage("grass_fence_Vleft.png");
+  fenceUDLR = loadImage("grass_fence_4.png");
+  
+  arrow = loadImage("Arrow_Up.png");
+
+  ground1 = int( loadStrings("map.txt") );
+  walkable = boolean(loadStrings("walkable.txt"));
+  for (int i = 1; i<=wide; i++) {
+    for (int j = 1; j<=tall; j++) {
+      ti = (i*40)-40;
+      tj = (j*40)-40;
+      grid[i][j] = new Box(ti, tj, int(random(0, 255)));
+      //ground1[i*j] = grid[i][j].ground;
+      grid[i][j].ground = ground1[(wide*(j-1))+i];
+      grid[i][j].isWalkable = walkable[(wide*(j-1))+i];
+      grid[i][j].locx = i;
+      grid[i][j].locy = j;
+    }
+  }
+  for (int i = 1; i<=wide; i++) {
+    for (int j = 1; j<=tall; j++) {
+      grid[i][j].display();
+    }
+  }
+}
