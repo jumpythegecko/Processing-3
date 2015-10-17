@@ -1,0 +1,281 @@
+
+public class Box {
+  int x;
+  int y;
+  float c;
+  boolean isWalkable = true;
+  int ground = 1;
+  boolean found = false;
+  int locx;
+  int locy;
+  boolean start = true;
+  float chance = 0;
+  int around = 0;
+  float noise1;
+  float noise2;
+  float Anoise;
+  float tree = 0;
+  int Oground = 0;
+  boolean boxhighlight = false;
+
+
+  Box(int tempx, int tempy, float tempc) {
+    x = tempx;
+    y = tempy;
+    c = tempc;
+  }
+
+  void display() {
+    if (start == true) {
+      ground = 1;
+      noise1 = noise(locx*noiseScalex, locy*noiseScaley);
+      noise2 = noise(wide-locx*noiseScale2x, tall-locy*noiseScale2y);
+      Anoise = ((noise1+noise2)/2)*255;
+      chance = random(0, 10000);
+      if (Anoise<=78) {     //water
+        ground = 6;
+        isWalkable = false;
+        start = false;
+      } else if (Anoise<=85) {     //sand
+        ground = 8;
+        isWalkable = true;
+        start = false;
+      } else if (Anoise>=145) {     //rock
+        ground = 14;
+        isWalkable = true;
+        start = false;
+      } else if (Anoise>=132) {     //dirt
+        ground = 11;
+        isWalkable = true;
+        start = false;
+      } else {     //grass
+        ground = 1;
+        isWalkable = true;
+        start = false;
+      }
+      tree = random(0, 100000);
+      if (locx == 1 || locx == wide || locy == 1 || locy == tall) {
+        ground = 5;     //edge bushes
+      } else if (tree>=96000 && ground != 6 && grid[locx][locy-1].Oground != 2 && grid[locx][locy-1].Oground != 3) {
+        Oground = 3;     //pine tree
+        grid[locx][locy-1].Oground = 2;     //pine tree top
+      } else if (tree>=92000 && ground == 1 && grid[locx][locy-1].ground == 1 && grid[locx][locy-1].Oground != 2 && grid[locx][locy-1].Oground != 3) {
+        ground = 9;     //regular tree
+        grid[locx][locy-1].ground = 10;     //regular tree top
+      } else if (tree>=94500 && ground == 8) {
+        ground = 13;     //sand rock
+      } else if (tree>=94500 && ground == 6) {
+        //Oground = 1;     //seeweeds
+      }
+    }
+    if (pause == false) {
+      //    imageMode(CORNER);
+      if (x>-70 && y>-70 && x<1270 && y<750) {
+        imageMode(CORNER);
+        if (ground == 1) {     //grass
+          image(grass, x, y);
+          isWalkable = true;
+        } else if (ground == 2) {     //dirt
+          image(dirt, x, y);
+          isWalkable = true;
+        } else if (ground == 0) {     //bricks
+          image(brick, x, y);
+          isWalkable = false;
+        } else if (ground == 3) {     //sign on grass
+          image(grassSign, x, y);
+          isWalkable = false;
+        } else if (ground == 4) {     //bricks with door
+          image(brickDoor, x, y);
+          isWalkable = true;
+        } else if (ground == 5) {     //bush on grass
+          image(grassBush, x, y);
+          isWalkable = false;
+        } else if (ground == 6) {     //water
+          image(water, x, y);
+          isWalkable = false;
+        } else if (ground == 7) {     //flower on grass
+          image(grassFlower, x, y);
+          isWalkable = true;
+        } else if (ground == 8) {     //sand
+          image(sand, x, y);
+          isWalkable = true;
+        } else if (ground == 9) {     //tree on grass bottom
+          image(grassTreeB, x, y);
+          isWalkable = false;
+        } else if (ground == 10) {     //tree on grass top
+          image(grassTreeT, x, y);
+          isWalkable = false;
+        } else if (ground == 11) {     //rocky ground
+          image(rocks, x, y);
+        } else if (ground == 12) {     //sign on grass
+          isWalkable = false;
+          if (grid[locx+1][locy].ground != 12 && grid[locx-1][locy].ground != 12 && grid[locx][locy-1].ground != 12 && grid[locx][locy+1].ground != 12) {
+            image(fence, x, y);
+          } else if (grid[locx+1][locy].ground == 12 && grid[locx-1][locy].ground == 12 && grid[locx][locy-1].ground == 12 && grid[locx][locy+1].ground == 12) {
+            image(fenceUDLR, x, y);
+          } else if (grid[locx+1][locy].ground != 12 && grid[locx-1][locy].ground == 12 && grid[locx][locy-1].ground == 12 && grid[locx][locy+1].ground == 12) {
+            image(fenceNR, x, y);
+          } else if (grid[locx+1][locy].ground != 12 && grid[locx-1][locy].ground != 12 && grid[locx][locy-1].ground == 12 && grid[locx][locy+1].ground == 12) {
+            image(fenceV, x, y);
+          } else if (grid[locx+1][locy].ground == 12 && grid[locx-1][locy].ground == 12 && grid[locx][locy-1].ground != 12 && grid[locx][locy+1].ground != 12) {
+            image(fenceH, x, y);
+          } else if (grid[locx+1][locy].ground == 12 && grid[locx-1][locy].ground == 12 && grid[locx][locy-1].ground == 12 && grid[locx][locy+1].ground != 12) { 
+            image(fenceND, x, y);
+          } else if (grid[locx+1][locy].ground == 12 && grid[locx-1][locy].ground == 12 && grid[locx][locy-1].ground != 12 && grid[locx][locy+1].ground == 12) { 
+            image(fenceNU, x, y);
+          } else if (grid[locx+1][locy].ground == 12 && grid[locx-1][locy].ground != 12 && grid[locx][locy-1].ground == 12 && grid[locx][locy+1].ground == 12) {
+            image(fenceNL, x, y);
+          } else if (grid[locx+1][locy].ground != 12 && grid[locx-1][locy].ground != 12 && grid[locx][locy-1].ground != 12 && grid[locx][locy+1].ground == 12) {
+            image(fenceD, x, y);
+          } else if (grid[locx+1][locy].ground != 12 && grid[locx-1][locy].ground != 12 && grid[locx][locy-1].ground == 12 && grid[locx][locy+1].ground != 12) {
+            image(fenceU, x, y);
+          } else if (grid[locx+1][locy].ground != 12 && grid[locx-1][locy].ground == 12 && grid[locx][locy-1].ground != 12 && grid[locx][locy+1].ground != 12) {
+            image(fenceL, x, y);
+          } else if (grid[locx+1][locy].ground == 12 && grid[locx-1][locy].ground != 12 && grid[locx][locy-1].ground != 12 && grid[locx][locy+1].ground != 12) {
+            image(fenceR, x, y);
+          } else if (grid[locx+1][locy].ground == 12 && grid[locx-1][locy].ground != 12 && grid[locx][locy-1].ground == 12 && grid[locx][locy+1].ground != 12) {
+            image(fenceLL, x, y);
+          } else if (grid[locx+1][locy].ground == 12 && grid[locx-1][locy].ground != 12 && grid[locx][locy-1].ground != 12 && grid[locx][locy+1].ground == 12) {
+            image(fenceUL, x, y);
+          } else if (grid[locx+1][locy].ground != 12 && grid[locx-1][locy].ground == 12 && grid[locx][locy-1].ground != 12 && grid[locx][locy+1].ground == 12) {
+            image(fenceUR, x, y);
+          } else if (grid[locx+1][locy].ground != 12 && grid[locx-1][locy].ground == 12 && grid[locx][locy-1].ground == 12 && grid[locx][locy+1].ground != 12) {
+            image(fenceLR, x, y);
+          }
+        } else if (ground == 13) {     //rock on sand
+          image(sandRock, x, y);
+        } else if (ground == 14) {
+          image(stone, x, y);
+          isWalkable = true;
+        }
+        //(abs(px-x)<150) && (abs(py-y)<150)
+        if ((abs(px-x))+(abs(py-y))<=400 && (abs(px-x)<=300) && (abs(py-y)<=300)) {     //has the player discovered this tile yet?
+          found = true;
+        }
+        //        if (found == false) {     //tile shading depending on distance from player and if tile has been found yet
+        //          fill(0);
+        //          stroke(0);
+        //          rect(x, y, 40, 40);
+        //        } else if ((abs(px-x))+(abs(py-y))<=300 && (abs(px-x)<=200) && (abs(py-y)<=200)) {
+        //          fill(0, 0, 0, 120);
+        //          noStroke();
+        //          rect(x, y, 40, 40);
+        //        } else if ((abs(px-x))+(abs(py-y))<=400 && (abs(px-x)<=300) && (abs(py-y)<=300)) {
+        //          fill(0, 0, 0, 155);
+        //          noStroke();
+        //          rect(x, y, 40, 40);
+        //        } else {
+        //          fill(0, 0, 0, 190);
+        //          noStroke();
+        //          rect(x, y, 40, 40);
+        //        }                               //end tile shading
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'u'||key == 'U')) {
+        c = 0;
+        ground = 0;
+        isWalkable = false;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'g'||key == 'G')) {
+        ground = 1;
+        isWalkable = true;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'h'||key == 'H')) {
+        ground = 2;
+        isWalkable = true;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'j'||key == 'J')) {
+        ground = 3;
+        isWalkable = false;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'k'||key == 'K')) {
+        ground = 4;
+        isWalkable = true;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'l'||key == 'L')) {
+        ground = 5;
+        isWalkable = false;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'm'||key == 'M')) {
+        ground = 6;
+        isWalkable = false;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'n'||key == 'N')) {
+        ground = 7;
+        isWalkable = true;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'b'||key == 'B')) {
+        ground = 8;
+        isWalkable = true;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'v'||key == 'V')) {
+        ground = 9;
+        isWalkable = false;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'f'||key == 'F')) {
+        ground = 10;
+        isWalkable = false;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'c'||key == 'C')) {
+        ground = 11;
+        isWalkable = false;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'x'||key == 'X')) {
+        ground = 12;
+        isWalkable = true;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'z'||key == 'Z')) {
+        ground = 13;
+        isWalkable = false;
+      }
+      if (mousePressed && mouseX>x && mouseX<x+40 && mouseY>y && mouseY<y+40 && (key == 'e'||key == 'E')) {
+        ground = 14;
+        isWalkable = true;
+      }
+    }
+  }
+
+  void display2() {
+    imageMode(CORNER);
+    if (x>-30 && y>-30 && x<1230 && y<710) {
+      if (Oground == 1) {     //seeweed
+        image(seaweed, x, y);
+      }
+      if (Oground == 2) {     //pine tree top
+        image(pineT, x, y);
+        isWalkable = false;
+      }
+      if (Oground == 3) {     //pine tree bottom
+        image(pineB, x, y);
+        isWalkable = false;
+      }
+    }
+  }
+
+  void shadows() {
+    if (x>-30 && y>-30 && x<1230 && y<710) {
+//      if (found == false) {
+//        fill(0);
+//        stroke(0);
+//        rect(x, y, 40, 40);
+//      } else if ((abs(px-x))+(abs(py-y))<=300 && (abs(px-x)<=200) && (abs(py-y)<=200)) {
+//        fill(0, 0, 0, 100);
+//        noStroke();
+//        rect(x, y, 40, 40);
+//      } else if ((abs(px-x))+(abs(py-y))<=400 && (abs(px-x)<=300) && (abs(py-y)<=300)) {
+//        fill(0, 0, 0, 135);
+//        noStroke();
+//        rect(x, y, 40, 40);
+//      } else {
+//        fill(0, 0, 0, 170);
+//        noStroke();
+//        rect(x, y, 40, 40);
+//      }
+      if(boxhighlight){
+        fill(255,255,255,75);
+        noStroke();
+        rect(x,y,40,40);
+        boxhighlight = false;
+      }
+    }
+  }
+}
