@@ -1,0 +1,62 @@
+
+
+void level1() {
+  if (pause == false) {
+    background(200);
+    player.move();
+  }
+  //  for (int i = 1; i<=wide; i++) {
+  //    for (int j = 1; j<=tall; j++) {
+  //      grid[i][j].display();
+  //    }
+  //  }
+  for (int i = plocx-33; i<=plocx+66; i++) {
+    for (int j = plocy-17; j<=plocy+34; j++) {
+      if (i>0 && i<wide && j>0 && j<tall) {
+        grid[i][j].display();
+      }
+    }
+  }
+  if (keyPressed && (key == 'p'||key == 'P') && millis()-pm>300) {
+    if (pause == true) {
+      pause = false;
+      justpaused = true;
+    } else if (pause == false) {
+      pause = true;
+    }
+    pm = millis();
+  }
+  if (pause == false) {
+    for (int i = plocx-33; i<=plocx+66; i++) {
+      for (int j = plocy-17; j<=plocy+34; j++) {
+        if (i>0 && i<wide && j>0 && j<tall) {
+          grid[i][j].display2();
+          grid[i][j].shadows();
+        }
+      }
+    }
+    player.display();
+    bars.healthBar();
+    bars.miniMap();
+    bars.invItem();
+  }
+  if (pause == true) {
+    MMain();
+  }
+  if (keyPressed && (key == 'o'||key == 'O')) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        if (map == 1) {
+          ground1[(wide*(j-1))+i] = grid[i][j].ground;
+          walkable[(wide*(j-1))+i] = grid[i][j].isWalkable;
+        }
+      }
+    }
+    saveStrings("map.txt", str(ground1));
+    saveStrings("walkable.txt", str(walkable));
+  }
+  //    fill(255,0,0);
+  //    noStroke();
+  //    text(px,90,100);
+  //    text(py,90,60);
+}
