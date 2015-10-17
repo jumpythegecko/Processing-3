@@ -1,0 +1,318 @@
+
+public class Player {
+
+  int m = 0;
+  int mm = 0;
+  int counter = 0;
+
+  Player(int tempx, int tempy) {
+    px = tempx;
+    py = tempy;
+  }
+
+  void display() {
+    //    stroke(255, 0, 0);
+    //    fill(255, 0, 0, 150);
+    //    ellipse(px, py-7, 30, 30);
+    imageMode(CENTER);
+    if(highlight == true){
+      if(pdu){
+        grid[plocx][plocy-1].boxhighlight = true;
+        if(grid[plocx][plocy-1].ground == 9 || grid[plocx][plocy-1].Oground == 3){
+          textSize(25);
+          fill(0);
+          stroke(0);
+          if(infot<infotime){
+          text("Press the ''B'' button to chop down trees",px-45,py-30);
+          infot++;
+          }
+          if(keyPressed && (key == 'b'||key == 'B')){
+            if(grid[plocx][plocy-1].ground == 9){
+              grid[plocx][plocy-1].ground = 1;
+              grid[plocx][plocy-2].ground = 1;
+            } else if(grid[plocx][plocy-1].Oground == 3){
+              grid[plocx][plocy-1].Oground = 0;
+              grid[plocx][plocy-2].Oground = 0;
+            }
+          }
+        }
+      } else if(pdd){
+        grid[plocx][plocy+1].boxhighlight = true;
+        if(grid[plocx][plocy+1].ground == 9 || grid[plocx][plocy+1].Oground == 3){
+          textSize(25);
+          fill(0);
+          stroke(0);
+          if(infot<infotime){
+          text("Press the ''B'' button to chop down trees",px-45,py-30);
+          infot++;
+          }
+          if(keyPressed&& (key == 'b'||key == 'B')){
+            if(grid[plocx][plocy+1].ground == 9){
+              grid[plocx][plocy+1].ground = 1;
+              grid[plocx][plocy].ground = 1;
+            } else if(grid[plocx][plocy+1].Oground == 3){
+              grid[plocx][plocy+1].Oground = 0;
+              grid[plocx][plocy].Oground = 0;
+            }
+          }
+        }
+      } else if(pdl){
+        grid[plocx-1][plocy].boxhighlight = true;
+        if(grid[plocx-1][plocy].ground == 9 || grid[plocx-1][plocy].Oground == 3){
+          textSize(25);
+          fill(0);
+          stroke(0);
+          if(infot<infotime){
+          text("Press the ''B'' button to chop down trees",px-45,py-30);
+          infot++;
+          }
+          if(keyPressed && (key == 'b'||key == 'B')){
+            if(grid[plocx-1][plocy].ground == 9){
+              grid[plocx-1][plocy].ground = 1;
+              grid[plocx-1][plocy-1].ground = 1;
+            } else if(grid[plocx-1][plocy].Oground == 3){
+              grid[plocx-1][plocy].Oground = 0;
+              grid[plocx-1][plocy-1].Oground = 0;
+            }
+          }
+        }
+      } else if(pdr){
+        grid[plocx+1][plocy].boxhighlight = true;
+        if(grid[plocx+1][plocy].ground == 9 || grid[plocx+1][plocy].Oground == 3){
+          textSize(25);
+          fill(0);
+          stroke(0);
+          if(infot<infotime){
+          text("Press the ''B'' button to chop down trees",px-45,py-30);
+          infot++;
+          }
+          if(keyPressed && (key == 'b'||key == 'B')){
+            if(grid[plocx+1][plocy].ground == 9){
+              grid[plocx+1][plocy].ground = 1;
+              grid[plocx+1][plocy-1].ground = 1;
+            } else if(grid[plocx+1][plocy].Oground == 3){
+              grid[plocx+1][plocy].Oground = 0;
+              grid[plocx+1][plocy-1].Oground = 0;
+            }
+          }
+        }
+      }
+    }
+    if(uA == true){
+      UP(px, py);
+    } else if(dA == true){
+      DOWN(px, py);
+    } else if(lA == true){
+      LEFT(px, py);
+    } else if(rA == true){
+      RIGHT(px, py);
+    } else if (pdu == true) {
+      image(player1Up, px, py-7);
+    } else if (pdd == true) {
+      image(player1, px, py-7);
+    } else if (pdl == true) {
+      image(player1Left, px, py-7);
+    } else if (pdr == true) {
+      image(player1Right, px, py-7);
+    }
+    if(playerMUp){
+      playerUp();
+    }
+    if(playerMDown){
+      playerDown();
+    }
+    if(playerMLeft){
+      playerLeft();
+    }
+    if(playerMRight){
+      playerRight();
+    }
+  }
+
+  void move() {
+    if (millis()-m>speed) {
+      if (u == true && plocy>1) {
+        if (map == 1) {
+          if (grid[plocx][plocy-1].isWalkable == true) {
+            mmm = millis();
+            uA = true;
+              if (py<=250 && plocy<gridlocy1+7 && plocy>6) {
+//                for (int i = 1; i<=wide; i++) {
+//                  for (int j = 1; j<=tall; j++) {
+//                    grid[i][j].y = grid[i][j].y + 40;
+//                  }
+//                }
+                mapU = true;
+                mapM = millis();
+                gridlocy1 = gridlocy1 - 1;
+                gridlocy2 = gridlocy2 - 1;
+                plocy = plocy - 1;
+              } else {
+                playerMUp = true;
+                playerM = millis();
+                plocy = plocy - 1;
+              }
+            pdu = true;
+            pdd = false;
+            pdl = false;
+            pdr = false;
+          }
+        }
+        
+        
+        
+        
+      } else if (d == true && plocy<tall) {
+        if (map == 1) {
+          if (grid[plocx][plocy+1].isWalkable == true) {
+            mmm = millis();
+            dA = true;
+            if (py>=430 && plocy>gridlocy2-7 && plocy<tall-6) {
+//              for (int i = 1; i<=wide; i++) {
+//                for (int j = 1; j<=tall; j++) {
+//                  grid[i][j].y = grid[i][j].y - 40;
+//                }
+//              }
+              mapD = true;
+              mapM = millis();
+              gridlocy1 = gridlocy1 + 1;
+              gridlocy2 = gridlocy2 + 1;
+              plocy = plocy + 1;
+            } else {
+              playerMDown = true;
+              playerM = millis();
+              plocy = plocy + 1;
+            }
+            pdu = false;
+            pdd = true;
+            pdl = false;
+            pdr = false;
+          }
+        }
+        
+        
+        
+        
+      } else if (l == true && plocx>1) {
+        if (map == 1) {
+          if (grid[plocx-1][plocy].isWalkable == true) {
+            mmm = millis();
+            lA = true;
+            if (px<=300 && plocx<gridlocx1+9 && plocx>8) {
+//              for (int i = 1; i<=wide; i++) {
+//                for (int j = 1; j<=tall; j++) {
+//                  grid[i][j].x = grid[i][j].x + 40;
+//                }
+//              }
+              mapL = true;
+              mapM = millis();
+              gridlocx1 = gridlocx1 - 1;
+              gridlocx2 = gridlocx2 - 1;
+              plocx = plocx - 1;
+            } else {
+              playerMLeft = true;
+              playerM = millis();
+              plocx = plocx - 1;
+            }
+            pdu = false;
+            pdd = false;
+            pdl = true;
+            pdr = false;
+          }
+        }
+        
+        
+        
+      } else if (r == true && plocx<wide) {
+        if (map == 1) {
+          if (grid[plocx+1][plocy].isWalkable == true) {
+            mmm = millis();
+            rA = true;
+            if (px>=900 && plocx>gridlocx2-9 && plocx<wide-8) {
+//              for (int i = 1; i<=wide; i++) {
+//                for (int j = 1; j<=tall; j++) {
+//                  grid[i][j].x = grid[i][j].x - 40;
+//                }
+//              }
+              mapR = true;
+              mapM = millis();
+              gridlocx1 = gridlocx1 + 1;
+              gridlocx2 = gridlocx2 + 1;
+              plocx = plocx + 1;
+            } else {
+              playerMRight = true;
+              playerM = millis();
+              plocx = plocx + 1;
+            }
+            pdu = false;
+            pdd = false;
+            pdl = false;
+            pdr = true;
+          }
+        }
+      }
+      m = millis();
+    }
+    if(mapU){
+      mapUp();
+    } else if(mapD){
+      mapDown();
+    } else if(mapL){
+      mapLeft();
+    } else if(mapR){
+      mapRight();
+    }
+  }
+}
+
+void keyPressed() {
+  if (key == 'w'||key == 'W'||keyCode == UP) {
+    u = true;
+    pdu = true;
+    pdd = false;
+    pdl = false;
+    pdr = false;
+  }
+  if (key == 's'||key == 'S'||keyCode == DOWN) {
+    d = true;
+    pdu = false;
+    pdd = true;
+    pdl = false;
+    pdr = false;
+  }
+  if (key == 'a'||key == 'A'||keyCode == LEFT) {
+    l = true;
+    pdu = false;
+    pdd = false;
+    pdl = true;
+    pdr = false;
+  }
+  if (key == 'd'||key == 'D'||keyCode == RIGHT) {
+    r = true;
+    pdu = false;
+    pdd = false;
+    pdl = false;
+    pdr = true;
+  }
+  if(keyCode == ESC){
+    //key = 'Q';
+  }
+  if(key == '7'){
+    exit();
+  }
+}
+
+void keyReleased() {
+  if (key == 'w'||key == 'W'||keyCode == UP) {
+    u = false;
+  }
+  if (key == 's'||key == 'S'||keyCode == DOWN) {
+    d = false;
+  }
+  if (key == 'a'||key == 'A'||keyCode == LEFT) {
+    l = false;
+  }
+  if (key == 'd'||key == 'D'||keyCode == RIGHT) {
+    r = false;
+  }
+}
