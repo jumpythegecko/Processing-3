@@ -1,0 +1,160 @@
+
+
+void mapUp() {
+  if (firstOne) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].y = grid[i][j].y + 10;
+      }
+    }
+    firstOne = false;
+  }
+  if (secondOne && millis()-mapM>speed/4) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].y = grid[i][j].y + 10;
+      }
+    }
+    secondOne = false;
+  }
+  if (thirdOne && millis()-mapM>speed/2) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].y = grid[i][j].y + 10;
+      }
+    }
+    thirdOne = false;
+  }
+  if (millis()-mapM>(speed/4)*3) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].y = grid[i][j].y + 10;
+      }
+    }
+    mapU = false;
+    firstOne = true;
+    secondOne = true;
+    thirdOne = true;
+  }
+}
+
+
+void mapDown() {
+  if (firstOne) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].y = grid[i][j].y - 10;
+      }
+    }
+    firstOne = false;
+  }
+  if (secondOne && millis()-mapM>speed/4) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].y = grid[i][j].y - 10;
+      }
+    }
+    secondOne = false;
+  }
+  if (thirdOne && millis()-mapM>speed/2) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].y = grid[i][j].y - 10;
+      }
+    }
+    thirdOne = false;
+  }
+  if (millis()-mapM>(speed/4)*3) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].y = grid[i][j].y - 10;
+      }
+    }
+    mapD = false;
+    firstOne = true;
+    secondOne = true;
+    thirdOne = true;
+  }
+}
+
+
+void mapLeft() {
+  if (firstOne) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].x = grid[i][j].x + 10;
+      }
+    }
+    firstOne = false;
+  }
+  if (secondOne && millis()-mapM>speed/4) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].x = grid[i][j].x + 10;
+      }
+    }
+    secondOne = false;
+  }
+  if (thirdOne && millis()-mapM>speed/2) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].x = grid[i][j].x + 10;
+      }
+    }
+    thirdOne = false;
+  }
+  if (millis()-mapM>(speed/4)*3) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].x = grid[i][j].x + 10;
+      }
+    }
+    mapL = false;
+    firstOne = true;
+    secondOne = true;
+    thirdOne = true;
+  }
+}
+
+boolean firstOne = true;
+boolean secondOne = true;
+boolean thirdOne = true;
+int mapM = 0;
+
+void mapRight() {
+  if (firstOne) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].x = grid[i][j].x - 10;
+      }
+    }
+    firstOne = false;
+  }
+  if (secondOne && millis()-mapM>speed/4) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].x = grid[i][j].x - 10;
+      }
+    }
+    secondOne = false;
+  }
+  if (thirdOne && millis()-mapM>speed/2) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].x = grid[i][j].x - 10;
+      }
+    }
+    thirdOne = false;
+  }
+  if (millis()-mapM>(speed/4)*3) {
+    for (int i = 1; i<=wide; i++) {
+      for (int j = 1; j<=tall; j++) {
+        grid[i][j].x = grid[i][j].x - 10;
+      }
+    }
+    mapR = false;
+    firstOne = true;
+    secondOne = true;
+    thirdOne = true;
+  }
+}
